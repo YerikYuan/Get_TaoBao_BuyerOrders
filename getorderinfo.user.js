@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         淘宝订单导出
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  淘宝网页版，已买到的宝贝页面会增加两个按。点击添加本页订单即可将订单添加到带保存的订单列表中，点击导出即可导出CSV文件。
 // @author       Yerik Yuan
 // @include      https://buyertrade.taobao*
@@ -39,6 +39,8 @@ if (orderListPage.exec(document.URL)) {
     addButton(orderListMain, exportOrders, "导出订单", "160px");
 }
 
+
+
 function toCsv(header, data, filename) {
     let rows = "";
     let row = header.join(",");
@@ -58,6 +60,7 @@ function toCsv(header, data, filename) {
 }
 
 let orderList = {}
+let listlength = 0;
 function addCurrentPageOrdersToList() {
 
     const orders = document.getElementsByClassName("js-order-container");
@@ -72,6 +75,12 @@ function addCurrentPageOrdersToList() {
         _.forEach(items, (value, key) => {
             orderList[key] = value;
         })
+    }
+    if (listlength < Object.keys(orderList).length){
+        listlength = Object.keys(orderList).length
+        alert("本页订单已添加成功！");
+    }else{
+        alert("重复添加或添加失败！");
     }
 }
 
