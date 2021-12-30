@@ -1,6 +1,11 @@
 # Get buyer order info from web taobao.com
 ## Install
-1. First install Tempermonkey extensiont to your web browser from https://www.tampermonkey.net/.
+1. Install a user script manager
++ Chrome: [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) or [Violentmonkey](https://chrome.google.com/webstore/detail/violent-monkey/jinjaccalgkegednnccohejagnlnfdag)
++ Firefox: [Greasemonkey](https://addons.mozilla.org/firefox/addon/greasemonkey/), [Tampermonkey](https://addons.mozilla.org/firefox/addon/tampermonkey/), or [Violentmonkey](https://addons.mozilla.org/firefox/addon/violentmonkey/)
++ Safari: [Tampermonkey](http://tampermonkey.net/?browser=safari) or [Userscripts](https://apps.apple.com/app/userscripts/id1463298887)
++ Microsoft Edge: [Tampermonkey](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)
++ Tampermonkey is recommonded for all browsers.
 2. Download ZIP with all files from my project and unzip it.
 3. Install this extension in Tempermonkey extension of your web browser.
 ## Useage
@@ -15,10 +20,14 @@
 2. Items with "保险服务" and "增值服务" is omitted automatically. 
 ## Security
 Pure front-end info extraction, sensitive info related to accont and password is not recorded.
-
 # 在网页版的taobao.com获取买家订单信息
 ## 安装
-1. 首先在https://www.tampermonkey.net/. 安装对应你浏览器的tampermonkey插件。
+1. 安装对应你浏览器的插件管理器。
++ Chrome: [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) or [Violentmonkey](https://chrome.google.com/webstore/detail/violent-monkey/jinjaccalgkegednnccohejagnlnfdag)
++ Firefox: [Greasemonkey](https://addons.mozilla.org/firefox/addon/greasemonkey/), [Tampermonkey](https://addons.mozilla.org/firefox/addon/tampermonkey/), or [Violentmonkey](https://addons.mozilla.org/firefox/addon/violentmonkey/)
++ Safari: [Tampermonkey](http://tampermonkey.net/?browser=safari) or [Userscripts](https://apps.apple.com/app/userscripts/id1463298887)
++ Microsoft Edge: [Tampermonkey](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd)
++ 推荐使用Tampermonkey，保证兼容性。
 2. 下载本项目的全部文件，并解压zip压缩包。
 3. 在你的浏览器的Tempermonkey扩展中安装压缩包中的js文件。
 ## 使用
@@ -28,7 +37,7 @@ Pure front-end info extraction, sensitive info related to accont and password is
 4. 可以切换到其他页面，添加其他页面信息（全程请勿刷新）。
 5. 添加完成后，点击"导出订单"。
 6. Engjoy!
-## Limitation
+## 已知限制
 1. 订单信息必须整页添加，不能单独增加某一条订单信息.
 2. "保险服务" 和 "增值服务" 等项是自动忽略的. 
 ## 安全
