@@ -30,6 +30,6 @@ Pure front-end info extraction, sensitive info related to accont and password is
 6. Engjoy!
 ## Limitation
 1. 订单信息必须整页添加，不能单独增加某一条订单信息.
-2. I"保险服务" 和 "增值服务" 等项是自动忽略的. 
+2. "保险服务" 和 "增值服务" 等项是自动忽略的. 
 ## 安全
 纯前端信息提取，账号密码等信息不会被记录。
