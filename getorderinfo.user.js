@@ -115,8 +115,9 @@ function processOrder(order) {
             let priceQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$" + index + ".$1.0.1.1']");
             let countQuery = order.querySelector("p[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$" + index + ".$2.0.0']");
             let actualPayQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$" + index + ".$4.0.0.2.0.1']");
-            let itemUrlQuery = order.querySelector("a[href]");
-
+            /*let itemUrlQuery = order.querySelector("a[href]");*/
+			let itemUrlQuery = order.querySelector("a[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$"+ index + ".$0.0.1.0.0']");
+			
             if (productQuery === null) {
                 break;
             }
