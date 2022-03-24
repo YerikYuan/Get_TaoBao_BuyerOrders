@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         淘宝订单导出
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.4
 // @description  淘宝网页版，已买到的宝贝页面会增加两个按。点击添加本页订单即可将订单添加到带保存的订单列表中，点击导出即可导出CSV文件。
 // @author       Yerik Yuan
 // @include      https://buyertrade.taobao*
