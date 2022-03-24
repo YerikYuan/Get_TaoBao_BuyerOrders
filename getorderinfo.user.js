@@ -5,11 +5,12 @@
 // @description  淘宝网页版，已买到的宝贝页面会增加两个按。点击添加本页订单即可将订单添加到带保存的订单列表中，点击导出即可导出CSV文件。
 // @author       Yerik Yuan
 // @include      https://buyertrade.taobao*
-// @require      https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js
+// @require      https://lib.tstatic.cn/ajax/lodash/4.17.20/lodash.min.js
 // @grant        none
 // @license      MIT
 // ==/UserScript==
 
+// https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js
 
 function addButton(element, onclickFunc, value = "按钮", width = "60px", height = "60px") {
     const button = document.createElement("input");
