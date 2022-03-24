@@ -86,7 +86,7 @@ function addCurrentPageOrdersToList() {
 
 function exportOrders() {
 
-    const header = ["订单号", "下单日期", "商品明细", "商品链接", "单价", "数量", "实付款", "状态"];
+    const header = ["订单号", "下单日期", "商品明细", "商品链接", "单价", "数量", "运费", "实付款", "状态"];
 
     toCsv(header, orderList, "订单信息")
 }
@@ -106,10 +106,12 @@ function processOrder(order) {
 
         let index = 0;
         var actualPay = 0;
+        var freight =0;
 
         while (true) {
             let count = 0;
-            actualPay = 0;
+            actualPay = "---";
+            freight = "---";
 
             let productQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$" + index + ".$0.0.1.0.0.1']");
             let priceQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$" + index + ".$1.0.1.1']");
@@ -117,7 +119,9 @@ function processOrder(order) {
             let actualPayQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$" + index + ".$4.0.0.2.0.1']");
             /*let itemUrlQuery = order.querySelector("a[href]");*/
 			let itemUrlQuery = order.querySelector("a[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$"+ index + ".$0.0.1.0.0']");
-			
+            let freightQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$"+ index + ".$4.0.1:$0.1']");
+
+
             if (productQuery === null) {
                 break;
             }
@@ -133,6 +137,10 @@ function processOrder(order) {
 
             if (countQuery != null){
                 count = countQuery.textContent;
+            }
+
+            if (freightQuery != null){
+                freight = freightQuery.textContent.replace("￥","");
             }
 
             if (actualPayQuery != null) {
@@ -155,6 +163,7 @@ function processOrder(order) {
                 itemUrl,
                 parseFloat(price),
                 count,
+                freight,
                 actualPay,
                 status,
             ]
