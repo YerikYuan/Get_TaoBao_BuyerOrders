@@ -1,16 +1,15 @@
 // ==UserScript==
 // @name         淘宝订单导出
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.7
 // @description  淘宝网页版，已买到的宝贝页面会增加两个按。点击添加本页订单即可将订单添加到带保存的订单列表中，点击导出即可导出CSV文件。
 // @author       Yerik Yuan
 // @include      https://buyertrade.taobao*
-// @require      https://lib.tstatic.cn/ajax/lodash/4.17.20/lodash.min.js
+// @require      https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lodash.js/4.17.21/lodash.min.js
 // @grant        none
 // @license      MIT
 // ==/UserScript==
 
-// https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js
 
 function addButton(element, onclickFunc, value = "按钮", width = "60px", height = "60px") {
     const button = document.createElement("input");
@@ -87,7 +86,7 @@ function addCurrentPageOrdersToList() {
 
 function exportOrders() {
 
-    const header = ["订单号", "下单日期", "商品明细", "商品链接", "单价", "数量", "运费", "实付款", "状态"];
+    const header = ["订单号", "下单日期", "店铺名称", "店铺链接", "商品明细", "商品链接", "所选规格", "单价", "数量", "运费", "实付款", "状态"];
 
     toCsv(header, orderList, "订单信息")
 }
@@ -108,11 +107,22 @@ function processOrder(order) {
         let index = 0;
         var actualPay = 0;
         var freight =0;
+        var specs = '无';
+        let storenamecouted = 0;
 
         while (true) {
             let count = 0;
-            actualPay = "---";
-            freight = "---";
+            let actualPay = "---";
+            let freight = "---";
+            let storename = '---';
+            let storeurl = '---';
+
+            let storeinfoQuery = order.querySelector("a[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:0.0.1.0.1']");
+            if(storeinfoQuery != null && storenamecouted == 0){
+                  storename = storeinfoQuery.textContent;
+                  storeurl = storeinfoQuery.href;
+                  storenamecouted =1;
+            }
 
             let productQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$" + index + ".$0.0.1.0.0.1']");
             let priceQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$" + index + ".$1.0.1.1']");
@@ -121,6 +131,7 @@ function processOrder(order) {
             /*let itemUrlQuery = order.querySelector("a[href]");*/
 			let itemUrlQuery = order.querySelector("a[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$"+ index + ".$0.0.1.0.0']");
             let freightQuery = order.querySelector("span[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$"+ index + ".$4.0.1:$0.1']");
+            let specQuery = order.querySelector("p[data-reactid='.0.7:$order-" + id + ".$" + id + ".0.1:1:0.$"+ index + ".$0.0.1.1']");
 
 
             if (productQuery === null) {
@@ -134,6 +145,11 @@ function processOrder(order) {
                 index++;
                 continue;
             }
+
+            if (specQuery != null){
+                specs = specQuery.textContent;
+            }
+
             let price = priceQuery.textContent;
 
             if (countQuery != null){
@@ -155,13 +171,18 @@ function processOrder(order) {
 
             let itemUrl = itemUrlQuery.href
 
+
+
             index++;
 
             outputData[id + index] = [
                 id,
                 date,
+                storename,
+                storeurl,
                 productQuery.textContent.replace(/,/g,"，"),
                 itemUrl,
+                specs,
                 parseFloat(price),
                 count,
                 freight,
